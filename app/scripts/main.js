@@ -55,4 +55,6 @@ var mtlMurals = (function() {
   }
 })();
 
-google.load('maps', '3', {'other_params': 'sensor=false','callback': mtlMurals.initMap });
+mtlMurals.initMap();
+
+// google.load('maps', '3', {'other_params': 'sensor=false','callback': mtlMurals.initMap });
