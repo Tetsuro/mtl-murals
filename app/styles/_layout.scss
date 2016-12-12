@@ -28,10 +28,23 @@ $spacing: 20px;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   padding: $spacing;
   width: $sidebar-width;
 }
 
+
+.mural-info {
+  flex: 1 1 100%;
+}
+
 .mural-info__image {
   max-width: 100%;
+}
+
+footer {
+  width: 100%;
+  font-size: 0.8em;
+  align-self: flex-end;
 }
