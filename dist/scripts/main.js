@@ -1,0 +1,1 @@
+"use strict";function initMap(){console.log("yo")}var mtlMurals=function(){function a(){var a={lat:-25.363,lng:131.044},o=new google.maps.Map(document.getElementById("map"),{zoom:4,center:a});new google.maps.Marker({position:a,map:o})}return{initMap:a}}();google.load("maps","3",{other_params:"sensor=false",callback:mtlMurals.initMap});
