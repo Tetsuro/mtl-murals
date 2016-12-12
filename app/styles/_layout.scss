@@ -1,0 +1,37 @@
+$sidebar-width: 500px;
+$header-height: 60px;
+$spacing: 20px;
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  height: $header-height;
+  align-items: center;
+  padding: $spacing;
+}
+
+.wrapper {
+  display: flex;
+}
+
+#map {
+   height: calc(100vh - #{$header-height});
+   width: 100%;
+}
+
+.map-area {
+  width: 100%;
+}
+
+.sidebar {
+  padding: $spacing;
+  width: $sidebar-width;
+}
+
+.mural-info__image {
+  max-width: 100%;
+}

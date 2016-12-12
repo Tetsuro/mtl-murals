@@ -16,7 +16,6 @@ var mtlMurals = (function() {
   };
 
   function initMap() {
-    console.log('initMapping')
     let montreal = {lat: 45.5017, lng: -73.5673};
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -43,8 +42,7 @@ var mtlMurals = (function() {
       });
 
       marker.addListener('click', function() {
-        console.log(this);
-        $MURAL_INFO.html(this.title);
+        $MURAL_INFO.html(address);
         $MURAL_IMAGE.attr('src', image);
       });
     });
