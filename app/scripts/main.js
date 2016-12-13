@@ -20,6 +20,8 @@ var mtlMurals = (function() {
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'));
     getMuralData();
+
+    map.addListener('dragend', updateMap);
   }
 
   function plotMarkers(data) {
@@ -53,12 +55,20 @@ var mtlMurals = (function() {
     map.fitBounds(bounds);
   }
 
+  function updateMap() {
+    let newBounds = map.getBounds();
+
+    // Can use Array Filter here later
+    markers.forEach(function() {
+      // can't access newBounds here.. WHY!
+      // if newBounds.contains(marker.position)... bla bla
+    });
+
+  }
+
   return {
-    initMap: initMap,
-    markers: markers
+    initMap: initMap
   }
 })();
 
 mtlMurals.initMap();
-
-// google.load('maps', '3', {'other_params': 'sensor=false','callback': mtlMurals.initMap });
