@@ -17,10 +17,12 @@ var mtlMurals = (function() {
       console.timeStamp("After getMuralData");
       console.log("After getMuralDat(): " + totalCount);
 
+      $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
       $MURAL_TOTAL_COUNT_NODE.html(totalCount);
 
       map.addListener('dragend', updateMap);
-
+      map.addListener('zoom_changed', updateMap);
+      // map.addListener('bounds_changed', updateMap);
     });
   }
 
@@ -69,13 +71,16 @@ var mtlMurals = (function() {
 
   function updateMap() {
     let newBounds = map.getBounds();
-
+    visibleCount = 0;
     // Can use Array Filter here later
     markers.forEach(function(marker) {
       if (newBounds.contains(marker.position)) {
-        $MURAL_VISIBLE_COUNT_NODE.html("test");
+        visibleCount++;
       }
     });
+    // debugger
+    $MURAL_VISIBLE_COUNT_NODE.html(visibleCount);
+    console.log(visibleCount);
   }
 
   return {
