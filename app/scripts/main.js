@@ -30,7 +30,7 @@ var mtlMurals = (function() {
     return $.ajax({
       dataType: 'json',
       cache: false,
-      url: 'http://proxy.hackeryou.com',
+      url: 'https://proxy.hackeryou.com',
       data: {
         reqUrl: MURAL_URL,
         xmlToJSON: false
