@@ -2,6 +2,8 @@ var mtlMurals = (function() {
   const MURAL_URL = 'http://donnees.ville.montreal.qc.ca/dataset/53d2e586-6e7f-4eae-89a1-2cfa7fc29fa0/resource/d325352b-1c06-4c3a-bf5e-1e4c98e0636b/download/murales.json';
   const $MURAL_INFO = $('.mural-info__title');
   const $MURAL_IMAGE = $('.mural-info__image');
+  const $MURAL_LIST = $('.mural-list');
+  const MURAL_LIST_ITEM_CLASS = 'mural-list__item';
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 
@@ -14,15 +16,14 @@ var mtlMurals = (function() {
     map = new google.maps.Map(document.getElementById('map'));
 
     $.when(getMuralData()).done(function(){
-      console.timeStamp('After getMuralData');
-      console.log('After getMuralDat(): ' + totalCount);
-
       $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
       $MURAL_TOTAL_COUNT_NODE.html(totalCount);
 
+      populateList();
       map.addListener('dragend', updateMap);
       map.addListener('zoom_changed', updateMap);
       // map.addListener('bounds_changed', updateMap);
+
     });
   }
 
@@ -42,8 +43,6 @@ var mtlMurals = (function() {
   function plotMarkers(data) {
     let muralSpotsArray = data.features;
     totalCount = muralSpotsArray.length;
-    console.timeStamp('Inside PlotMarkers');
-    console.log('Inside plotMarkers() ' + totalCount)
     let bounds = new google.maps.LatLngBounds();
 
     muralSpotsArray.forEach(function(muralSpot) {
@@ -82,10 +81,21 @@ var mtlMurals = (function() {
         visibleCount++;
       }
     });
-    // debugger
     $MURAL_VISIBLE_COUNT_NODE.html(visibleCount);
-    console.log(visibleCount);
   }
+
+  function populateList() {
+    markers.forEach(function(marker) {
+      let markerListItem = document.createElement('li');
+      markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
+      markerListItem.innerHTML = marker.title;
+
+      $MURAL_LIST[0].appendChild(markerListItem);
+      // $MURAL_LIST.appendTo('')
+        console.log(marker.title)
+    });
+  }
+
 
   return {
     initMap: initMap
@@ -93,9 +103,4 @@ var mtlMurals = (function() {
 
 })();
 
-
-console.log('hello');
-$(document).ready(function() {
-  console.log('ready')
-  mtlMurals.initMap();
-});
+mtlMurals.initMap();

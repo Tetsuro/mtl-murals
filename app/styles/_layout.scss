@@ -32,6 +32,8 @@ $spacing: 20px;
   flex-direction: column;
   padding: $spacing;
   width: $sidebar-width;
+  overflow: scroll;
+  height: calc(100vh - #{$header-height});
 }
 
 
