@@ -6,6 +6,17 @@ MTL Murals is a a fun little project I started to plot out the beautiful murals 
 
 [Future screenshot here]
 
+## Spinning up a server
+
+Before getting started, please make sure you have the Gulp CLI installed. 
+
+- `cd` to the `mtl-murals` folder
+- `npm install` 
+- `bower install`
+- `gulp serve`
+
+... that should be it!
+
 ## Deploying to gh-pages
 
 Use the following command: `git subtree push --prefix dist origin gh-pages`
