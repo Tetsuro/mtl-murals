@@ -14,8 +14,8 @@ var mtlMurals = (function() {
     map = new google.maps.Map(document.getElementById('map'));
 
     $.when(getMuralData()).done(function(){
-      console.timeStamp("After getMuralData");
-      console.log("After getMuralDat(): " + totalCount);
+      console.timeStamp('After getMuralData');
+      console.log('After getMuralDat(): ' + totalCount);
 
       $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
       $MURAL_TOTAL_COUNT_NODE.html(totalCount);
@@ -38,8 +38,8 @@ var mtlMurals = (function() {
   function plotMarkers(data) {
     let muralSpotsArray = data.features;
     totalCount = muralSpotsArray.length;
-    console.timeStamp("Inside PlotMarkers");
-    console.log("Inside plotMarkers() " + totalCount)
+    console.timeStamp('Inside PlotMarkers');
+    console.log('Inside plotMarkers() ' + totalCount)
     let bounds = new google.maps.LatLngBounds();
 
     muralSpotsArray.forEach(function(muralSpot) {
@@ -92,6 +92,6 @@ var mtlMurals = (function() {
 
 console.log('hello');
 $(document).ready(function() {
-  console.log("ready")
+  console.log('ready')
   mtlMurals.initMap();
 });
