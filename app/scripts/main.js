@@ -30,7 +30,11 @@ var mtlMurals = (function() {
     return $.ajax({
       dataType: 'json',
       cache: false,
-      url: MURAL_URL,
+      url: 'http://proxy.hackeryou.com',
+      data: {
+        reqUrl: MURAL_URL,
+        xmlToJSON: false
+      },
       success: plotMarkers
     });
   }
