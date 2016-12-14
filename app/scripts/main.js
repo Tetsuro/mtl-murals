@@ -1,31 +1,43 @@
 var mtlMurals = (function() {
-  const MURAL_URL = 'https://jsonp.afeld.me/?url=http://donnees.ville.montreal.qc.ca/dataset/53d2e586-6e7f-4eae-89a1-2cfa7fc29fa0/resource/d325352b-1c06-4c3a-bf5e-1e4c98e0636b/download/murales.json';
+  const MURAL_URL = 'http://donnees.ville.montreal.qc.ca/dataset/53d2e586-6e7f-4eae-89a1-2cfa7fc29fa0/resource/d325352b-1c06-4c3a-bf5e-1e4c98e0636b/download/murales.json';
   const $MURAL_INFO = $('.mural-info__title');
   const $MURAL_IMAGE = $('.mural-info__image');
+  const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
+  const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 
   let map = {};
   let markers = [];
-
-  function getMuralData() {
-    $.ajax({
-      dataType: 'json',
-      cache: false,
-      url: MURAL_URL,
-      success: function(data) {
-        plotMarkers(data);
-      }
-    });
-  }
+  let totalCount = 0;
+  let visibleCount;
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'));
-    getMuralData();
 
-    map.addListener('dragend', updateMap);
+    $.when(getMuralData()).done(function(){
+      console.timeStamp("After getMuralData");
+      console.log("After getMuralDat(): " + totalCount);
+
+      $MURAL_TOTAL_COUNT_NODE.html(totalCount);
+
+      map.addListener('dragend', updateMap);
+
+    });
+  }
+
+  function getMuralData() {
+    return $.ajax({
+      dataType: 'json',
+      cache: false,
+      url: MURAL_URL,
+      success: plotMarkers
+    });
   }
 
   function plotMarkers(data) {
     let muralSpotsArray = data.features;
+    totalCount = muralSpotsArray.length;
+    console.timeStamp("Inside PlotMarkers");
+    console.log("Inside plotMarkers() " + totalCount)
     let bounds = new google.maps.LatLngBounds();
 
     muralSpotsArray.forEach(function(muralSpot) {
@@ -59,16 +71,22 @@ var mtlMurals = (function() {
     let newBounds = map.getBounds();
 
     // Can use Array Filter here later
-    markers.forEach(function() {
-      // can't access newBounds here.. WHY!
-      // if newBounds.contains(marker.position)... bla bla
+    markers.forEach(function(marker) {
+      if (newBounds.contains(marker.position)) {
+        $MURAL_VISIBLE_COUNT_NODE.html("test");
+      }
     });
-
   }
 
   return {
     initMap: initMap
   }
+
 })();
 
-mtlMurals.initMap();
+
+console.log('hello');
+$(document).ready(function() {
+  console.log("ready")
+  mtlMurals.initMap();
+});
