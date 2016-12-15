@@ -52,6 +52,9 @@ var mtlMurals = (function() {
       let longitude = muralSpot.properties.longitude;
       let image = muralSpot.properties.image;
       let address = muralSpot.properties.adresse;
+      let artist = muralSpot.properties.artiste;
+      let year = muralSpot.properties.annee;
+
       let marker = new google.maps.Marker({
         position: {lat: muralSpot.properties.latitude, lng: muralSpot.properties.longitude},
         map: map,
@@ -68,6 +71,7 @@ var mtlMurals = (function() {
       marker.addListener('click', function() {
         $MURAL_INFO.html(address);
         $MURAL_IMAGE.attr('src', image);
+
       });
     });
 

@@ -1,13 +1,14 @@
 $sidebar-width: 500px;
 $header-height: 60px;
 $spacing: 20px;
+$border: 1px solid #ddd;
 
 * {
   box-sizing: border-box;
 }
 
 .header {
-  border-bottom: 1px solid #ddd;
+  border-bottom: $border;
   display: flex;
   height: $header-height;
   align-items: center;
@@ -30,14 +31,21 @@ $spacing: 20px;
 .sidebar {
   display: flex;
   flex-direction: column;
-  padding: $spacing;
   width: $sidebar-width;
-  overflow-y: scroll;
+  overflow: hidden;
   height: calc(100vh - #{$header-height});
 }
 
+.mural-count {
+  padding: $spacing;
+  border-bottom: $border;
+  font-weight: bold;
+}
+
 .mural-info {
-  flex: 1 1 100%;
+  // TEMP
+  display: none;
+  // flex: 1 1 100%;
 }
 
 .mural-info__image {
@@ -45,18 +53,34 @@ $spacing: 20px;
 }
 
 .mural-list {
+  flex: 1 1 100%;
   list-style-type: none;
-  padding: 0;
+  overflow-y: scroll;
+  padding: $spacing;
   margin: 0;
+  border-bottom: $border;
 }
 
 .mural-list__button {
-  
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  padding: $spacing;
+  margin-bottom: $spacing;
+  border: $border;
+  width: 100%;
+  font-size: 1em;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    border: 1px solid salmon;
+  }
 }
 
-
-footer {
+.mural-credits{
   width: 100%;
   font-size: 0.8em;
   align-self: flex-end;
+  padding: $spacing;
 }
