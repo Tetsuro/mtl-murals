@@ -4,6 +4,7 @@ var mtlMurals = (function() {
   const $MURAL_IMAGE = $('.mural-info__image');
   const $MURAL_LIST = $('.mural-list');
   const MURAL_LIST_ITEM_CLASS = 'mural-list__item';
+  const MURAL_LIST_BUTTON_CLASS = 'mural-list__button';
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 
@@ -18,6 +19,7 @@ var mtlMurals = (function() {
     $.when(getMuralData()).done(function(){
       $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
       $MURAL_TOTAL_COUNT_NODE.html(totalCount);
+
 
       populateList();
       map.addListener('dragend', updateMap);
@@ -45,17 +47,17 @@ var mtlMurals = (function() {
     totalCount = muralSpotsArray.length;
     let bounds = new google.maps.LatLngBounds();
 
-    muralSpotsArray.forEach(function(muralSpot) {
+    muralSpotsArray.forEach(function(muralSpot, index) {
       let latitude = muralSpot.properties.latitude;
       let longitude = muralSpot.properties.longitude;
       let image = muralSpot.properties.image;
       let address = muralSpot.properties.adresse;
-
       let marker = new google.maps.Marker({
         position: {lat: muralSpot.properties.latitude, lng: muralSpot.properties.longitude},
         map: map,
         title: address,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        id: index
       });
 
       let position = new google.maps.LatLng(latitude, longitude);
@@ -78,7 +80,10 @@ var mtlMurals = (function() {
     // Can use Array Filter here later
     markers.forEach(function(marker) {
       if (newBounds.contains(marker.position)) {
+        $('[data-index=' + marker.id +']').show();
         visibleCount++;
+      } else {
+        $('[data-index=' + marker.id +']').hide();
       }
     });
     $MURAL_VISIBLE_COUNT_NODE.html(visibleCount);
@@ -87,20 +92,19 @@ var mtlMurals = (function() {
   function populateList() {
     markers.forEach(function(marker) {
       let markerListItem = document.createElement('li');
+      let markerListButton = document.createElement('button');
       markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
-      markerListItem.innerHTML = marker.title;
-
+      markerListItem.setAttribute('data-index', marker.id);
       $MURAL_LIST[0].appendChild(markerListItem);
-      // $MURAL_LIST.appendTo('')
-        console.log(marker.title)
+      markerListItem.appendChild(markerListButton);
+      markerListButton.classList.add(MURAL_LIST_BUTTON_CLASS)
+      markerListButton.innerHTML = marker.title;
     });
   }
-
 
   return {
     initMap: initMap
   }
-
 })();
 
 mtlMurals.initMap();

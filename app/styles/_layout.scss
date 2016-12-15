@@ -32,10 +32,9 @@ $spacing: 20px;
   flex-direction: column;
   padding: $spacing;
   width: $sidebar-width;
-  overflow: scroll;
+  overflow-y: scroll;
   height: calc(100vh - #{$header-height});
 }
-
 
 .mural-info {
   flex: 1 1 100%;
@@ -44,6 +43,17 @@ $spacing: 20px;
 .mural-info__image {
   max-width: 100%;
 }
+
+.mural-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mural-list__button {
+  
+}
+
 
 footer {
   width: 100%;
