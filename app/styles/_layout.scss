@@ -1,4 +1,4 @@
-$sidebar-width: 500px;
+$sidebar-width: 450px;
 $header-height: 60px;
 $spacing: 20px;
 $border: 1px solid #ddd;
@@ -29,6 +29,7 @@ $border: 1px solid #ddd;
 }
 
 .sidebar {
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   width: $sidebar-width;
