@@ -16,29 +16,40 @@ var mtlMurals = (function() {
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'));
 
-    $.when(getMuralData()).done(function(){
-      $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
-      $MURAL_TOTAL_COUNT_NODE.html(totalCount);
+    // $.when(getMuralData()).done(function(){
+    getMuralData()
+      .then(function(data) {
+          map.addListener('dragend', updateMap);
+          map.addListener('zoom_changed', updateMap);
+          return data;
+      })
+      .then(plotMarkers)
+      .then(populateList);
+    $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
+    $MURAL_TOTAL_COUNT_NODE.html(totalCount);
 
 
-      populateList();
-      map.addListener('dragend', updateMap);
-      map.addListener('zoom_changed', updateMap);
-      // map.addListener('bounds_changed', updateMap);
+    // populateList();
+    // map.addListener('dragend', updateMap);
+    // map.addListener('zoom_changed', updateMap);
+    // map.addListener('bounds_changed', updateMap);
 
-    });
+    // });
   }
 
   function getMuralData() {
-    return $.ajax({
-      dataType: 'json',
-      cache: false,
-      url: 'https://proxy.hackeryou.com',
-      data: {
-        reqUrl: MURAL_URL,
-        xmlToJSON: false
-      },
-      success: plotMarkers
+    return new Promise(function(resolve, reject) {
+      $.ajax({
+        dataType: 'json',
+        cache: false,
+        url: 'https://proxy.hackeryou.com',
+        data: {
+          reqUrl: MURAL_URL,
+          xmlToJSON: false
+        },
+        success: resolve,
+        error: reject
+      });
     });
   }
 
@@ -73,12 +84,15 @@ var mtlMurals = (function() {
         $MURAL_IMAGE.attr('src', image);
 
       });
-    });
 
+
+    });
     map.fitBounds(bounds);
+    updateMap();
   }
 
   function updateMap() {
+
     let newBounds = map.getBounds();
     visibleCount = 0;
     // Can use Array Filter here later
