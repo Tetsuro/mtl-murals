@@ -5,6 +5,8 @@ var mtlMurals = (function() {
   const $MURAL_LIST = $('.mural-list');
   const MURAL_LIST_ITEM_CLASS = 'mural-list__item';
   const MURAL_LIST_BUTTON_CLASS = 'mural-list__button';
+  const MURAL_LIST_SPAN_CLASS = 'mural-list__span';
+  const MURAL_LIST_IMAGE_CLASS = 'mural-list__image';
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 
@@ -16,7 +18,6 @@ var mtlMurals = (function() {
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'));
 
-    // $.when(getMuralData()).done(function(){
     getMuralData()
       .then(function(data) {
           map.addListener('dragend', updateMap);
@@ -65,7 +66,8 @@ var mtlMurals = (function() {
         map: map,
         title: address,
         animation: google.maps.Animation.DROP,
-        id: index
+        id: index,
+        image: image
       });
 
       let position = new google.maps.LatLng(latitude, longitude);
@@ -76,7 +78,6 @@ var mtlMurals = (function() {
       marker.addListener('click', function() {
         $MURAL_INFO.html(address);
         $MURAL_IMAGE.attr('src', image);
-
       });
 
 
@@ -105,12 +106,21 @@ var mtlMurals = (function() {
     markers.forEach(function(marker) {
       let markerListItem = document.createElement('li');
       let markerListButton = document.createElement('button');
+      let markerListSpan = document.createElement('span');
+      let markerListImage = document.createElement('img');
+
       markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
       markerListItem.setAttribute('data-index', marker.id);
       $MURAL_LIST[0].appendChild(markerListItem);
       markerListItem.appendChild(markerListButton);
       markerListButton.classList.add(MURAL_LIST_BUTTON_CLASS)
-      markerListButton.innerHTML = marker.title;
+      markerListSpan.innerHTML = marker.title;
+      markerListSpan.classList.add(MURAL_LIST_SPAN_CLASS)
+      markerListImage.setAttribute('data-src', marker.image);
+      markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
+      markerListButton.appendChild(markerListImage);
+      markerListButton.appendChild(markerListSpan);
+
     });
   }
 

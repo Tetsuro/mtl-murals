@@ -62,17 +62,28 @@ $border: 1px solid #ddd;
   border-bottom: $border;
 }
 
+.mural-list__image {
+  max-width: 100px;
+}
+
+.mural-list__span {
+  padding: 0 $spacing / 2; 
+}
+
+
 .mural-list__button {
+  align-items: center;
   border: 0;
   border-radius: 4px;
   background: #fff;
-  padding: $spacing;
+  padding: 0;
   margin-bottom: $spacing;
   border: $border;
   width: 100%;
   font-size: 1em;
   text-align: left;
   cursor: pointer;
+  display: flex;
 
   &:hover, &:focus {
     border: 1px solid salmon;
