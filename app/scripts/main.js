@@ -24,17 +24,11 @@ var mtlMurals = (function() {
           return data;
       })
       .then(plotMarkers)
-      .then(populateList);
-    $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
-    $MURAL_TOTAL_COUNT_NODE.html(totalCount);
-
-
-    // populateList();
-    // map.addListener('dragend', updateMap);
-    // map.addListener('zoom_changed', updateMap);
-    // map.addListener('bounds_changed', updateMap);
-
-    // });
+      .then(populateList)
+      .then(function(){
+        $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
+        $MURAL_TOTAL_COUNT_NODE.html(totalCount);
+      });
   }
 
   function getMuralData() {
