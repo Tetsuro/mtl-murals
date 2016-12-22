@@ -1,6 +1,3 @@
-const test = "is this global";
-
-
 var mtlMurals = (function() {
   const MURAL_URL = 'http://donnees.ville.montreal.qc.ca/dataset/53d2e586-6e7f-4eae-89a1-2cfa7fc29fa0/resource/d325352b-1c06-4c3a-bf5e-1e4c98e0636b/download/murales.json';
   const $MURAL_INFO = $('.mural-info__title');
@@ -20,15 +17,13 @@ var mtlMurals = (function() {
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'));
+    window.addEventListener('resize', debounce(debouncedResize, 300));
 
     getMuralData()
       .then(function(data) {
           map.addListener('dragend', updateMap);
           map.addListener('zoom_changed', updateMap);
           map.addListener('resize', updateMap);
-
-          // This fires way too much.
-          // map.addListener('bounds_changed', updateMap);
           return data;
       })
       .then(plotMarkers)
@@ -94,7 +89,7 @@ var mtlMurals = (function() {
   }
 
   function updateMap() {
-    console.log("updating!")
+    console.log('updating!')
     let newBounds = map.getBounds();
     visibleCount = 0;
     // Can use Array Filter here later
@@ -127,15 +122,12 @@ var mtlMurals = (function() {
       markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
       markerListButton.appendChild(markerListImage);
       markerListButton.appendChild(markerListSpan);
-
     });
   }
 
-  //  Debounce this
-  // window.addEventListener('resize', function(){
-  //   console.log("resizing");
-  //   google.maps.event.trigger(map, 'resize');
-  // });
+  function debouncedResize() {
+    google.maps.event.trigger(map, 'resize');
+  }
 
   return {
     initMap: initMap
