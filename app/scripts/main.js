@@ -6,7 +6,7 @@ var mtlMurals = (function() {
   const MURAL_LIST_ITEM_CLASS = 'mural-list__item';
   const MURAL_LIST_BUTTON_CLASS = 'mural-list__button';
   const MURAL_LIST_SPAN_CLASS = 'mural-list__span';
-  const MURAL_LIST_IMAGE_CLASS = 'mural-list__image';
+  const MURAL_LIST_IMAGE_CLASS = 'mural-list__image-wrapper';
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 

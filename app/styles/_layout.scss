@@ -2,6 +2,8 @@ $sidebar-width: 450px;
 $header-height: 60px;
 $spacing: 20px;
 $border: 1px solid #ddd;
+$thumbnail-size-x: 100px;
+$thumbnail-size-y: 100px;
 
 * {
   box-sizing: border-box;
@@ -13,6 +15,10 @@ $border: 1px solid #ddd;
   height: $header-height;
   align-items: center;
   padding: $spacing;
+}
+
+.header__heading-link {
+  color: #000;
 }
 
 .wrapper {
@@ -63,10 +69,19 @@ $border: 1px solid #ddd;
   border-bottom: $border;
 }
 
-.mural-list__image {
-  min-width: 100px;
-  height: 100px;
+.lazyload,
+.lazyloading {
+  background-image: url('../images/loading.gif');
+  background-size: initial !important;
+}
+
+.mural-list__image-wrapper {
+  min-width: $thumbnail-size-x;
+  height: $thumbnail-size-y;
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: 50% 50%;
+  transition: opacity 300ms;
 }
 
 .mural-list__span {
