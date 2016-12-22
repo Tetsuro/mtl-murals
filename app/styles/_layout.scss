@@ -2,8 +2,9 @@ $sidebar-width: 450px;
 $header-height: 60px;
 $spacing: 20px;
 $border: 1px solid #ddd;
-$thumbnail-size-x: 100px;
+$thumbnail-size-x: 125px;
 $thumbnail-size-y: 100px;
+$color-blue: #3C7BD6;
 
 * {
   box-sizing: border-box;
@@ -84,8 +85,12 @@ $thumbnail-size-y: 100px;
   transition: opacity 300ms;
 }
 
-.mural-list__span {
+.mural-list__meta {
   padding: 0 $spacing / 2;
+}
+
+.mural-list__address {
+  margin: 0;
 }
 
 .mural-list__button {
@@ -103,7 +108,7 @@ $thumbnail-size-y: 100px;
   display: flex;
 
   &:hover, &:focus {
-    border: 1px solid salmon;
+    border: 1px solid $color-blue;
   }
 }
 

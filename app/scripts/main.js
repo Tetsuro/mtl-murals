@@ -5,8 +5,9 @@ var mtlMurals = (function() {
   const $MURAL_LIST = $('.mural-list');
   const MURAL_LIST_ITEM_CLASS = 'mural-list__item';
   const MURAL_LIST_BUTTON_CLASS = 'mural-list__button';
-  const MURAL_LIST_SPAN_CLASS = 'mural-list__span';
+  const MURAL_LIST_META_CLASS = 'mural-list__meta';
   const MURAL_LIST_IMAGE_CLASS = 'mural-list__image-wrapper';
+  const MURAL_LIST_ADDRESS_CLASS = 'mural-list__address';
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
 
@@ -69,20 +70,19 @@ var mtlMurals = (function() {
         title: address,
         animation: google.maps.Animation.DROP,
         id: index,
-        image: image
+        image: image,
+        artist: artist,
+        year: year
       });
 
       let position = new google.maps.LatLng(latitude, longitude);
       bounds.extend(position);
-
       markers.push(marker);
 
       marker.addListener('click', function() {
-        $MURAL_INFO.html(address);
-        $MURAL_IMAGE.attr('src', image);
+        // $MURAL_INFO.html(address);
+        // $MURAL_IMAGE.attr('src', image);
       });
-
-
     });
     map.fitBounds(bounds);
     updateMap();
@@ -107,7 +107,10 @@ var mtlMurals = (function() {
     markers.forEach(function(marker) {
       let markerListItem = document.createElement('li');
       let markerListButton = document.createElement('button');
-      let markerListSpan = document.createElement('span');
+      let markerListMeta = document.createElement('p');
+      let markerListAddress = document.createElement('p');
+      let markerListArtist = document.createElement('span');
+      let markerListYear = document.createElement('span');
       let markerListImage = document.createElement('div');
 
       markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
@@ -115,12 +118,22 @@ var mtlMurals = (function() {
       $MURAL_LIST[0].appendChild(markerListItem);
       markerListItem.appendChild(markerListButton);
       markerListButton.classList.add(MURAL_LIST_BUTTON_CLASS)
-      markerListSpan.innerHTML = marker.title;
-      markerListSpan.classList.add(MURAL_LIST_SPAN_CLASS)
+
+      markerListAddress.classList.add(MURAL_LIST_ADDRESS_CLASS)
+      markerListAddress.innerHTML = marker.title;
+      markerListMeta.appendChild(markerListAddress);
+      markerListMeta.classList.add(MURAL_LIST_META_CLASS)
+
+      markerListArtist.innerHTML = marker.artist;
+      markerListYear.innerHTML = ' (' + marker.year + ')';
+
       markerListImage.setAttribute('data-bg', marker.image);
       markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
       markerListButton.appendChild(markerListImage);
-      markerListButton.appendChild(markerListSpan);
+      markerListButton.appendChild(markerListMeta);
+      markerListMeta.appendChild(markerListArtist);
+      markerListMeta.appendChild(markerListYear);
+
     });
   }
 
