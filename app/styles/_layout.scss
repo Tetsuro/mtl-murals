@@ -30,6 +30,7 @@ $border: 1px solid #ddd;
 
 .sidebar {
   flex: 1 0 auto;
+  border-left: $border;
   display: flex;
   flex-direction: column;
   width: $sidebar-width;
@@ -63,13 +64,14 @@ $border: 1px solid #ddd;
 }
 
 .mural-list__image {
-  max-width: 100px;
+  min-width: 100px;
+  height: 100px;
+  background-size: cover;
 }
 
 .mural-list__span {
-  padding: 0 $spacing / 2; 
+  padding: 0 $spacing / 2;
 }
-
 
 .mural-list__button {
   align-items: center;

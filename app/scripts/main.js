@@ -89,7 +89,6 @@ var mtlMurals = (function() {
   }
 
   function updateMap() {
-    console.log('updating!')
     let newBounds = map.getBounds();
     visibleCount = 0;
     // Can use Array Filter here later
@@ -109,7 +108,7 @@ var mtlMurals = (function() {
       let markerListItem = document.createElement('li');
       let markerListButton = document.createElement('button');
       let markerListSpan = document.createElement('span');
-      let markerListImage = document.createElement('img');
+      let markerListImage = document.createElement('div');
 
       markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
       markerListItem.setAttribute('data-index', marker.id);
@@ -118,7 +117,7 @@ var mtlMurals = (function() {
       markerListButton.classList.add(MURAL_LIST_BUTTON_CLASS)
       markerListSpan.innerHTML = marker.title;
       markerListSpan.classList.add(MURAL_LIST_SPAN_CLASS)
-      markerListImage.setAttribute('data-src', marker.image);
+      markerListImage.setAttribute('data-bg', marker.image);
       markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
       markerListButton.appendChild(markerListImage);
       markerListButton.appendChild(markerListSpan);
@@ -128,6 +127,14 @@ var mtlMurals = (function() {
   function debouncedResize() {
     google.maps.event.trigger(map, 'resize');
   }
+
+  document.addEventListener('lazybeforeunveil', function(e){
+    var bg = e.target.getAttribute('data-bg');
+    if(bg){
+      e.target.style.backgroundImage = 'url(' + bg + ')';
+    }
+  });
+
 
   return {
     initMap: initMap
