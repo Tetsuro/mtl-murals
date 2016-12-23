@@ -8,8 +8,11 @@ var mtlMurals = (function() {
   const MURAL_LIST_META_CLASS = 'mural-list__meta';
   const MURAL_LIST_IMAGE_CLASS = 'mural-list__image-wrapper';
   const MURAL_LIST_ADDRESS_CLASS = 'mural-list__address';
+  const $MODAL_IMAGE = $('.mural-modal__image');
+  const $MODAL_HEADING = $('.mural-modal__heading');
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
+  const MODAL = $('[data-remodal-id=modal]').remodal();
 
   let map = {};
   let markers = [];
@@ -80,8 +83,10 @@ var mtlMurals = (function() {
       markers.push(marker);
 
       marker.addListener('click', function() {
-        // $MURAL_INFO.html(address);
-        // $MURAL_IMAGE.attr('src', image);
+
+        $MODAL_HEADING.html(address);
+        $MODAL_IMAGE.attr('src', image);
+        MODAL.open();
       });
     });
     map.fitBounds(bounds);

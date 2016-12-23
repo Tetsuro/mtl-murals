@@ -11,6 +11,8 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/bower_components/remodal/dist/remodal.css">
+    
     <!-- endbuild -->
 
   </head>
@@ -37,6 +39,14 @@
       </aside>
     </main>
 
+    <div class="mural-modal" data-remodal-id="modal">
+      <button data-remodal-action="close" class="remodal-close"></button>
+      <h1 class="mural-modal__heading"></h1>
+      <p>
+        <img class="mural-modal__image" src="" />
+      </p>
+    </div>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -52,6 +62,7 @@
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/lazysizes/lazysizes.js"></script>
+    <script src="/bower_components/remodal/dist/remodal.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
