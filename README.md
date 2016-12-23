@@ -4,7 +4,7 @@
 
 MTL Murals is a a fun little project I started to plot out the beautiful murals of Montreal in a Google Map. Mostly it's an exercise for me to improve my Javascript by playing with ES6, Google Maps API, and Open Data.
 
-[Future screenshot here]
+Check it out [here](https://tetsuro.github.io/mtl-murals/)!
 
 ## Spinning up a server
 
