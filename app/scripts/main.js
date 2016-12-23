@@ -35,7 +35,7 @@ var mtlMurals = (function() {
       .then(plotMarkers)
       .then(populateList)
       .then(function(){
-        $MURAL_VISIBLE_COUNT_NODE.html(totalCount); // On init, # of visible markers == total markers.
+        $MURAL_VISIBLE_COUNT_NODE.html(totalCount);
         $MURAL_TOTAL_COUNT_NODE.html(totalCount);
       });
   }

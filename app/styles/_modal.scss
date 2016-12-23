@@ -3,7 +3,7 @@
 }
 
 .mural-modal__heading {
-  margin: 0 0 $spacing / 2 0;
+  margin: 0 auto $spacing / 2;
 }
 .mural-modal__meta {
   margin: 0 0 $spacing 0;
@@ -40,4 +40,7 @@
   position: absolute;
   top: $spacing;
   right: $spacing;
+  position:absolute;
+  background: none;
+  border: none;
 }
