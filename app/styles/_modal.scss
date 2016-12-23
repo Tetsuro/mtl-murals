@@ -20,6 +20,16 @@
   background: rgba(#000, 0.8);
 }
 
+.remodal-wrapper, .remodal-overlay {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.remodal-overlay.remodal-is-opened,
+.remodal-wrapper.remodal-is-opened {
+  opacity: 1;
+}
+
 .remodal, .remodal-wrapper:after {
   vertical-align: middle;
 }
