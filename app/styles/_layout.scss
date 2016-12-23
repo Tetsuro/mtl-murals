@@ -19,7 +19,12 @@ $color-blue: #3C7BD6;
 }
 
 .header__heading-link {
+  text-decoration: none;
   color: #000;
+
+  &:hover, &:active {
+    color: $color-blue;
+  }
 }
 
 .wrapper {
@@ -49,12 +54,6 @@ $color-blue: #3C7BD6;
   padding: $spacing;
   border-bottom: $border;
   font-weight: bold;
-}
-
-.mural-info {
-  // TEMP
-  display: none;
-  // flex: 1 1 100%;
 }
 
 .mural-info__image {
@@ -110,34 +109,4 @@ $color-blue: #3C7BD6;
   &:hover, &:focus {
     border: 1px solid $color-blue;
   }
-}
-
-.mural-modal__image {
-  max-width: 100%;
-}
-
-.mural-credits{
-  width: 100%;
-  font-size: 0.8em;
-  align-self: flex-end;
-  padding: $spacing;
-}
-
-.remodal-overlay {
-  background: rgba(#000, 0.8);
-}
-
-.remodal, .remodal-wrapper:after {
-  vertical-align: middle;
-}
-
-.remodal {
-  max-width: 100%;
-  width: auto;
-  margin-bottom: 10px;
-  padding: 35px;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  color: #2b2e38;
-  background: #fff;
 }

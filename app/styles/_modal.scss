@@ -1,0 +1,43 @@
+.mural-modal__image {
+  max-width: 100%;
+}
+
+.mural-modal__heading {
+  margin: 0 0 $spacing / 2 0;
+}
+.mural-modal__meta {
+  margin: 0 0 $spacing 0;
+}
+
+.mural-credits{
+  width: 100%;
+  font-size: 0.8em;
+  align-self: flex-end;
+  padding: $spacing;
+}
+
+.remodal-overlay {
+  background: rgba(#000, 0.8);
+}
+
+.remodal, .remodal-wrapper:after {
+  vertical-align: middle;
+}
+
+.remodal {
+  max-width: 100%;
+  width: auto;
+  margin-bottom: 10px;
+  padding: $spacing;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  color: #2b2e38;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.remodal-close {
+  position: absolute;
+  top: $spacing;
+  right: $spacing;
+}

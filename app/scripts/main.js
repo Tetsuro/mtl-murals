@@ -10,6 +10,8 @@ var mtlMurals = (function() {
   const MURAL_LIST_ADDRESS_CLASS = 'mural-list__address';
   const $MODAL_IMAGE = $('.mural-modal__image');
   const $MODAL_HEADING = $('.mural-modal__heading');
+  const $MODAL_ARTIST = $('.mural-modal__meta-artist');
+  const $MODAL_YEAR = $('.mural-modal__meta-year');
   const $MURAL_TOTAL_COUNT_NODE = $('.mural-count__total');
   const $MURAL_VISIBLE_COUNT_NODE = $('.mural-count__visible');
   const MODAL = $('[data-remodal-id=modal]').remodal();
@@ -74,6 +76,7 @@ var mtlMurals = (function() {
         animation: google.maps.Animation.DROP,
         id: index,
         image: image,
+        address: address,
         artist: artist,
         year: year
       });
@@ -90,6 +93,8 @@ var mtlMurals = (function() {
 
   function openModal() {
     $MODAL_HEADING.html(this.address);
+    $MODAL_ARTIST.html(this.artist);
+    $MODAL_YEAR.html(this.year);
     $MODAL_IMAGE.attr('src', this.image);
     MODAL.open();
   };
@@ -115,8 +120,6 @@ var mtlMurals = (function() {
       let markerListButton = document.createElement('button');
       let markerListMeta = document.createElement('p');
       let markerListAddress = document.createElement('p');
-      let markerListArtist = document.createElement('span');
-      let markerListYear = document.createElement('span');
       let markerListImage = document.createElement('div');
 
       markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
@@ -130,15 +133,11 @@ var mtlMurals = (function() {
       markerListMeta.appendChild(markerListAddress);
       markerListMeta.classList.add(MURAL_LIST_META_CLASS)
 
-      markerListArtist.innerHTML = marker.artist;
-      markerListYear.innerHTML = ' (' + marker.year + ')';
 
       markerListImage.setAttribute('data-bg', marker.image);
       markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
       markerListButton.appendChild(markerListImage);
       markerListButton.appendChild(markerListMeta);
-      markerListMeta.appendChild(markerListArtist);
-      markerListMeta.appendChild(markerListYear);
 
       markerListButton.addEventListener('click', openModal.bind(marker));
     });
