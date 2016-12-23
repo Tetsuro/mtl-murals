@@ -82,16 +82,17 @@ var mtlMurals = (function() {
       bounds.extend(position);
       markers.push(marker);
 
-      marker.addListener('click', function() {
-
-        $MODAL_HEADING.html(address);
-        $MODAL_IMAGE.attr('src', image);
-        MODAL.open();
-      });
+      marker.addListener('click', openModal);
     });
     map.fitBounds(bounds);
     updateMap();
   }
+
+  function openModal() {
+    $MODAL_HEADING.html(this.address);
+    $MODAL_IMAGE.attr('src', this.image);
+    MODAL.open();
+  };
 
   function updateMap() {
     let newBounds = map.getBounds();
@@ -139,6 +140,7 @@ var mtlMurals = (function() {
       markerListMeta.appendChild(markerListArtist);
       markerListMeta.appendChild(markerListYear);
 
+      markerListButton.addEventListener('click', openModal.bind(marker));
     });
   }
 
