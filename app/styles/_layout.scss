@@ -29,11 +29,20 @@ $color-blue: #3C7BD6;
 
 .wrapper {
   display: flex;
+  flex-direction: column;
+
+  @include desktop {
+    flex-direction: row;
+  }
 }
 
 #map {
-   height: calc(100vh - #{$header-height});
-   width: 100%;
+  width: 100%;
+  height: calc(50vh - #{$header-height / 2});
+
+  @include desktop {
+    height: calc(100vh - #{$header-height});
+  }
 }
 
 .map-area {
@@ -41,13 +50,17 @@ $color-blue: #3C7BD6;
 }
 
 .sidebar {
-  flex: 1 0 auto;
-  border-left: $border;
   display: flex;
   flex-direction: column;
-  width: $sidebar-width;
   overflow: hidden;
-  height: calc(100vh - #{$header-height});
+  height: calc(50vh - #{$header-height / 2});
+
+  @include desktop {
+    width: $sidebar-width;
+    height: calc(100vh - #{$header-height});
+    flex: 1 0 auto;
+    border-left: $border;
+  }
 }
 
 .mural-count {
@@ -109,4 +122,12 @@ $color-blue: #3C7BD6;
   &:hover, &:focus {
     border: 1px solid $color-blue;
   }
+}
+
+.mural-credits{
+  text-align: center;
+  width: 100%;
+  font-size: 0.8em;
+  align-self: flex-end;
+  padding: $spacing;
 }

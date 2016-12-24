@@ -1,5 +1,6 @@
 .mural-modal__image {
   max-width: 100%;
+  width: auto;
 }
 
 .mural-modal__heading {
@@ -7,13 +8,6 @@
 }
 .mural-modal__meta {
   margin: 0 0 $spacing 0;
-}
-
-.mural-credits{
-  width: 100%;
-  font-size: 0.8em;
-  align-self: flex-end;
-  padding: $spacing;
 }
 
 .remodal-overlay {
@@ -35,9 +29,8 @@
 }
 
 .remodal {
-  max-width: 100%;
+  max-width: calc(100% - #{$spacing * 2});
   width: auto;
-  margin-bottom: 10px;
   padding: $spacing;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
