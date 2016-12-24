@@ -3,6 +3,10 @@
   width: auto;
 }
 
+.mural-moral__header {
+  padding: 0 $spacing * 2;
+}
+
 .mural-modal__heading {
   margin: 0 auto $spacing / 2;
 }
@@ -41,8 +45,9 @@
 
 .remodal-close {
   position: absolute;
-  top: $spacing;
-  right: $spacing;
+  padding: $spacing;
+  top: 0;
+  right: 0;
   position:absolute;
   background: none;
   border: none;
