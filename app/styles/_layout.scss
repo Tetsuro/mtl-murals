@@ -2,8 +2,10 @@ $sidebar-width: 450px;
 $header-height: 60px;
 $spacing: 20px;
 $border: 1px solid #ddd;
-$thumbnail-size-x: 125px;
-$thumbnail-size-y: 100px;
+$desktop-thumbnail-size-x: 125px;
+$desktop-thumbnail-size-y: 100px;
+$mobile-thumbnail-size-x: 100px;
+$mobile-thumbnail-size-y: 80px;
 $color-blue: #3C7BD6;
 
 * {
@@ -31,7 +33,7 @@ $color-blue: #3C7BD6;
   display: flex;
   flex-direction: column;
 
-  @include desktop {
+  @include tablet-and-up {
     flex-direction: row;
   }
 }
@@ -40,7 +42,7 @@ $color-blue: #3C7BD6;
   width: 100%;
   height: calc(40vh - #{$header-height / 2});
 
-  @include desktop {
+  @include tablet-and-up {
     height: calc(100vh - #{$header-height});
   }
 }
@@ -56,7 +58,7 @@ $color-blue: #3C7BD6;
   height: calc(60vh - #{$header-height / 2});
   -webkit-overflow-scrolling: touch;
 
-  @include desktop {
+  @include tablet-and-up {
     width: $sidebar-width;
     height: calc(100vh - #{$header-height});
     flex: 1 0 auto;
@@ -65,9 +67,13 @@ $color-blue: #3C7BD6;
 }
 
 .mural-count {
-  padding: $spacing;
+  padding: $spacing / 2;
   border-bottom: $border;
   font-weight: bold;
+
+  @include tablet-and-up {
+    padding: $spacing;
+  }
 }
 
 .mural-info__image {
@@ -78,9 +84,13 @@ $color-blue: #3C7BD6;
   flex: 1 1 100%;
   list-style-type: none;
   overflow-y: scroll;
-  padding: $spacing;
+  padding: $spacing / 2;
   margin: 0;
   border-bottom: $border;
+
+  @include tablet-and-up {
+    padding: $spacing;
+  }
 }
 
 .lazyload,
@@ -90,12 +100,17 @@ $color-blue: #3C7BD6;
 }
 
 .mural-list__image-wrapper {
-  min-width: $thumbnail-size-x;
-  height: $thumbnail-size-y;
+  min-width: $mobile-thumbnail-size-x;
+  height: $mobile-thumbnail-size-y;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   transition: opacity 300ms;
+
+  @include tablet-and-up {
+    min-width: $desktop-thumbnail-size-x;
+    height: $desktop-thumbnail-size-y;
+  }
 }
 
 .mural-list__meta {
@@ -114,7 +129,7 @@ $color-blue: #3C7BD6;
   border-radius: 4px;
   background: #fff;
   padding: 0;
-  margin-bottom: $spacing;
+  margin-bottom: $spacing / 2;
   border: $border;
   width: 100%;
   font-size: 1em;
@@ -124,6 +139,10 @@ $color-blue: #3C7BD6;
 
   &:hover, &:focus {
     border: 1px solid $color-blue;
+  }
+
+  @include tablet-and-up {
+    margin-bottom: $spacing;
   }
 }
 
