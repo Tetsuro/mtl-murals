@@ -1,5 +1,7 @@
 # Montreal Murals
 
+![](http://i.imgur.com/UUdW5p2.jpg)
+
 ## What is this?
 
 MTL Murals is a a fun little project I started to plot out the beautiful murals of Montreal in a Google Map. Mostly it's an exercise for me to improve my Javascript by playing with ES6, Google Maps API, and Open Data.
