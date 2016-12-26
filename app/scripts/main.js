@@ -154,6 +154,10 @@ var mtlMurals = (function() {
     }
   });
 
+  document.addEventListener('closed', '.remodal', function(e){
+    console.log('Clogins')
+  });
+
 
   return {
     initMap: initMap
