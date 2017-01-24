@@ -117,28 +117,20 @@ var mtlMurals = (function() {
   function populateList() {
     markers.forEach(function(marker) {
       let markerListItem = document.createElement('li');
-      let markerListButton = document.createElement('button');
-      let markerListMeta = document.createElement('p');
-      let markerListAddress = document.createElement('p');
-      let markerListImage = document.createElement('div');
+      let markerListMarkup = `
+        <li class="${MURAL_LIST_ITEM_CLASS}" data-index="${marker.id}">
+          <button class="${MURAL_LIST_BUTTON_CLASS}">
+            <div data-bg="${marker.image}" class="lazyload ${MURAL_LIST_IMAGE_CLASS}"></div>
+            <p class=${MURAL_LIST_META_CLASS}>
+              <p class="${MURAL_LIST_ADDRESS_CLASS}">${marker.title}</p>
+            </p>
+          </button>
+        </li>
+      `;
 
-      markerListItem.classList.add(MURAL_LIST_ITEM_CLASS);
-      markerListItem.setAttribute('data-index', marker.id);
+      markerListItem.innerHTML = markerListMarkup;
+      let markerListButton = $(markerListItem).find(`.${MURAL_LIST_BUTTON_CLASS}`)[0];
       $MURAL_LIST[0].appendChild(markerListItem);
-      markerListItem.appendChild(markerListButton);
-      markerListButton.classList.add(MURAL_LIST_BUTTON_CLASS)
-
-      markerListAddress.classList.add(MURAL_LIST_ADDRESS_CLASS)
-      markerListAddress.innerHTML = marker.title;
-      markerListMeta.appendChild(markerListAddress);
-      markerListMeta.classList.add(MURAL_LIST_META_CLASS)
-
-
-      markerListImage.setAttribute('data-bg', marker.image);
-      markerListImage.classList.add('lazyload', MURAL_LIST_IMAGE_CLASS);
-      markerListButton.appendChild(markerListImage);
-      markerListButton.appendChild(markerListMeta);
-
       markerListButton.addEventListener('click', openModal.bind(marker));
     });
   }
