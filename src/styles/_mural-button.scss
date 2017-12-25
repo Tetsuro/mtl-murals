@@ -1,0 +1,25 @@
+.mural-button {
+  display: flex;
+  border: 0;
+  padding: 0;
+  margin-bottom: $spacing;
+  width: 100%;
+  background: #fff;
+  border: $border;
+  border-radius: 4px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.mural-button__thumbnail {
+  flex: 0 0 160px;  
+  height: 160px;
+  background-size: cover;
+  background-position: 50% 50%;
+
+}
+
+.mural-button__info {
+  padding: $spacing;
+  font-size: 1rem;
+}
