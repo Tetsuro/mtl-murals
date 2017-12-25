@@ -1,0 +1,13 @@
+.topbar {
+  padding: 0 $spacing;
+  border-bottom: $border;
+  display: flex;
+  height: $topbar-height;
+  align-items: center;
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+}
+

@@ -1,0 +1,30 @@
+$mural-list-width: 400px;
+
+.mural-list,
+.mural-list__header,
+.mural-list__footer {
+  padding: $spacing;
+}
+
+.mural-list__wrapper {
+  height: calc(100vh - #{$topbar-height});
+  width: $mural-list-width;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.mural-list {
+  flex: 1 1 100%;
+  overflow-y: scroll;  
+  border-bottom: $border;
+  padding-bottom: 0;
+}
+
+.mural-list__header {
+  border-bottom: $border;
+}
+
+.mural-list__footer {
+  font-size: 0.8rem;
+}

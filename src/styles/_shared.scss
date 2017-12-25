@@ -1,0 +1,13 @@
+$spacing: 20px;
+$border: 1px solid #ddd;
+$sidebar-width: 450px;
+$topbar-height: 60px;
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+}
