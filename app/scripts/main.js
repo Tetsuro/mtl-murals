@@ -146,9 +146,9 @@ var mtlMurals = (function() {
     }
   });
 
-  document.addEventListener('closed', '.remodal', function(e){
-    console.log('Clogins')
-  });
+  // document.addEventListener('closed', '.remodal', function(e){
+  //   console.log('Clogins')
+  // });
 
 
   return {
