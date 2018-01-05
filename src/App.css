@@ -111,7 +111,18 @@ body {
   padding: 20px;
   font-size: 1rem; }
 
+.mural-marker {
+  background: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  color: #fff; }
+
 .map {
   width: calc(100vw - 450px);
   height: calc(100vh - 60px);
   border-right: 1px solid #ddd; }
+
+#map {
+  height: 100vh;
+  background: #ddd; }

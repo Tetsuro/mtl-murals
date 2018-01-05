@@ -4,11 +4,11 @@ class MuralButton extends React.Component {
   render() {
     let { 
       adresse: address, 
-      annee: year, 
-      artiste: artist,
+      // annee: year, 
+      // artiste: artist,
       image,
-      latitude,
-      longitude,
+      // latitude,
+      // longitude,
       id,
     } = this.props.muralData.properties;
 
@@ -16,17 +16,16 @@ class MuralButton extends React.Component {
       backgroundImage: `url(${image})`,
     };
 
-      
     return (
-      <button className="mural-button">
+      <button className="mural-button" key={id}>
         <span 
           className="mural-button__thumbnail" 
           style={muralThumbnailStyle}
         >
-        </span> 
+        </span>
         <span className="mural-button__info">
           {address}
-        </span>      
+        </span>
       </button>
     );
   }

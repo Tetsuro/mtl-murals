@@ -3,3 +3,8 @@
   height: calc(100vh - #{$topbar-height});
   border-right: $border;
 }
+
+#map {
+  height: 100vh;
+  background: #ddd;
+}
