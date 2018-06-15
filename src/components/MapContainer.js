@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
 import { Map, Marker} from 'google-maps-react';
+import Modal from './Modal';
 
 export default class MapContainer extends Component {
   constructor() {
@@ -49,10 +49,14 @@ export default class MapContainer extends Component {
     });
   }
   
-  onMarkerClick() {
-    console.log(this)
+  onMarkerClick(image) {
+    console.log(this);
+    this.setState({
+      modalIsOpen: true,
+      image,
+    });
   }
-
+  
   render() {
     if(!this.state.muralsArray) {
       return (
@@ -60,30 +64,34 @@ export default class MapContainer extends Component {
       )
     } else {
       return (
-        <Map 
-          google={this.props.google}
-          bounds={this.state.bounds}
-          muralsArray={this.props.muralsArray}
-        >
-          {
-            this.state.muralsArray.map((mural)=> {
-              return (
-                <Marker
-                  key = {mural.properties.id}
-                  title = {mural.properties.artiste}
-                  position={
-                    { 
-                      lat: mural.properties.latitude, 
-                      lng: mural.properties.longitude,
+        <div>
+          <Map 
+            google={this.props.google}
+            bounds={this.state.bounds}
+            muralsArray={this.props.muralsArray}
+          >
+            {
+              this.state.muralsArray.map((mural)=> {
+                return (
+                  <Marker
+                    key = {mural.properties.id}
+                    title = {mural.properties.artiste}
+                    position={
+                      { 
+                        lat: mural.properties.latitude, 
+                        lng: mural.properties.longitude,
+                      }
                     }
-                  }
-                  onClick={this.onMarkerClick}
-                />
-
-              )
-            })
-          } 
-        </Map>
+                    onClick={this.onMarkerClick.bind(this, mural.properties.image)}
+                  />
+                )
+              })
+            }
+          </Map>
+          <Modal>
+            Modal here!
+          </Modal>
+        </div>
       );
     }
 
