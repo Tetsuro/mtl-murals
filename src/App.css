@@ -114,4 +114,5 @@ body {
 .map {
   width: calc(100vw - 450px);
   height: calc(100vh - 60px);
-  border-right: 1px solid #ddd; }
+  border-right: 1px solid #ddd;
+  position: relative; }

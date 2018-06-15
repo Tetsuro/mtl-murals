@@ -34,10 +34,12 @@ class App extends Component {
       <div className="mtl-murals">
         <Topbar />
         <div className="wrapper">
-          <MapContainer
-            google={this.props.google}
-            muralsArray={this.state.muralsArray}
-          />
+          <div className="map">
+            <MapContainer
+              google={this.props.google}
+              muralsArray={this.state.muralsArray}
+            />
+          </div>
           <MuralList
             muralsArray={this.state.muralsArray}
           />

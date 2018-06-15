@@ -2,4 +2,5 @@
   width: calc(100vw - #{$sidebar-width});
   height: calc(100vh - #{$topbar-height});
   border-right: $border;
+  position: relative;
 }

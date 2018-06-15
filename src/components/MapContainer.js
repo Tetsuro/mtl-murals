@@ -23,12 +23,9 @@ export default class MapContainer extends Component {
   }
 
   loadMaps() {
-    console.log('Load Maps.')
     if (!this.state.muralsArray) {
       return;
     }
-
-    // console.log("load maps!", this.state.muralsArray); // Is this firing twice without guard above?
 
     const google = this.props.google; // sets props equal to google
     const maps = this.props.google.maps; // sets maps to google maps props
@@ -51,16 +48,44 @@ export default class MapContainer extends Component {
       bounds,
     });
   }
+  
+  onMarkerClick() {
+    console.log(this)
+  }
 
   render() {
-    return (
-      <Map 
-        className="map" 
-        google={this.props.google}
-        bounds={this.state.bounds}
-        muralsArray={this.props.muralsArray}
-      >
-      </Map>
-    );
+    if(!this.state.muralsArray) {
+      return (
+        <div>Loading...</div>
+      )
+    } else {
+      return (
+        <Map 
+          google={this.props.google}
+          bounds={this.state.bounds}
+          muralsArray={this.props.muralsArray}
+        >
+          {
+            this.state.muralsArray.map((mural)=> {
+              return (
+                <Marker
+                  key = {mural.properties.id}
+                  title = {mural.properties.artiste}
+                  position={
+                    { 
+                      lat: mural.properties.latitude, 
+                      lng: mural.properties.longitude,
+                    }
+                  }
+                  onClick={this.onMarkerClick}
+                />
+
+              )
+            })
+          } 
+        </Map>
+      );
+    }
+
   }
 }
