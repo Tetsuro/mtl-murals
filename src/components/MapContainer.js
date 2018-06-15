@@ -3,30 +3,63 @@ import React, { Component } from 'react';
 import { Map, Marker} from 'google-maps-react';
 
 export default class MapContainer extends Component {
-  componentDidUpdate() {
+  constructor() {
+    super();
+    this.state = {
+      bounds: null,
+      muralsArray: null,
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.muralsArray !== null) {
+      return;
+    }
+
+    this.setState({
+      muralsArray: this.props.muralsArray,
+    });
     this.loadMaps();
   }
 
   loadMaps() {
-    const { google } = this.props; // sets props equal to google
-    const maps = google.maps; // sets maps to google maps props
+    console.log('Load Maps.')
+    if (!this.state.muralsArray) {
+      return;
+    }
 
-    // const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
-    // const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
+    // console.log("load maps!", this.state.muralsArray); // Is this firing twice without guard above?
 
-    // const mapConfig = Object.assign({}, {
-    //   center: { lat: 40.7485722, lng: -74.0068633 }, // sets center of google map to NYC.
-    //   zoom: 11, // sets zoom. Lower numbers are zoomed further out.
-    //   mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
-    // })
+    const google = this.props.google; // sets props equal to google
+    const maps = this.props.google.maps; // sets maps to google maps props
+    const muralsArray = this.state.muralsArray;
+    
+    let bounds = new google.maps.LatLngBounds();
 
-    // this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+    muralsArray.map((mural) => {
+      let {
+        latitude,
+        longitude,
+      } = mural.properties;
+      bounds.extend({
+        lat: latitude,
+        lng: longitude,
+      });
+    });
+
+    this.setState({
+      bounds,
+    });
   }
 
   render() {
     return (
-      <Map className="map" google={this.props.google}>
-        
+      <Map 
+        className="map" 
+        google={this.props.google}
+        bounds={this.state.bounds}
+        muralsArray={this.props.muralsArray}
+      >
       </Map>
     );
   }

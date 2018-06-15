@@ -26,7 +26,6 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ muralsArray: data.features })
-        console.log(data.features);
       });
   }
 
@@ -37,6 +36,7 @@ class App extends Component {
         <div className="wrapper">
           <MapContainer
             google={this.props.google}
+            muralsArray={this.state.muralsArray}
           />
           <MuralList
             muralsArray={this.state.muralsArray}
