@@ -44,7 +44,7 @@ class App extends Component {
             muralsArray={this.state.muralsArray}
           />
         </div>
-        <div id="modal" className="modal"></div>
+        <div id="modal"></div>
       </div>
     );
   }

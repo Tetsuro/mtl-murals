@@ -8,6 +8,7 @@ export default class MapContainer extends Component {
     this.state = {
       bounds: null,
       muralsArray: null,
+      modalIsOpen: false,
     }
   }
 
@@ -50,11 +51,19 @@ export default class MapContainer extends Component {
   }
   
   onMarkerClick(image) {
-    console.log(this);
+    console.log(image);
     this.setState({
       modalIsOpen: true,
       image,
     });
+  }
+
+  onModalClose() {
+    this.setState(
+      {
+        modalIsOpen: false,
+      }
+    )
   }
   
   render() {
@@ -63,6 +72,12 @@ export default class MapContainer extends Component {
         <div>Loading...</div>
       )
     } else {
+      const modal = this.state.modalIsOpen ? ( 
+        <Modal>
+          <button onClick={this.onModalClose.bind(this)}>Close</button>
+          <img src={this.state.image} />
+        </Modal>) : null;
+
       return (
         <div>
           <Map 
@@ -88,9 +103,7 @@ export default class MapContainer extends Component {
               })
             }
           </Map>
-          <Modal>
-            Modal here!
-          </Modal>
+          { modal }
         </div>
       );
     }

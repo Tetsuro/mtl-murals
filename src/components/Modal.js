@@ -9,8 +9,16 @@ class Modal extends React.Component {
   }
 
   componentDidMount() {
+    console.log("mount!")
+    this.el.classList.add('modal');
     const modalRoot = document.getElementById('modal');
     modalRoot.appendChild(this.el);
+  }
+
+  componentWillUnmount() {
+    console.log("unmount!")
+    const modalRoot = document.getElementById('modal');
+    modalRoot.removeChild(this.el);
   }
 
   render() {
