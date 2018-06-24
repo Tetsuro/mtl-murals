@@ -35,7 +35,7 @@ export default class MapContainer extends Component {
                         lng: mural.properties.longitude,
                       }
                     }
-                    onClick={() => {this.props.onMarkerClick(mural.properties.image)}}
+                    onClick={() => {this.props.onMarkerClick(mural.properties)}}
                   />
                 )
               })

@@ -20,9 +20,9 @@ class App extends Component {
     this.state = {
       modalIsOpen: false,
       muralsArray: [],
+      visibleMurals: [],
     }
   }
-
 
   componentDidMount() {
     this.fetchMutalData();
@@ -41,7 +41,6 @@ class App extends Component {
 
   getMapBounds() {
     const google = this.props.google;
-    this.maps = this.props.google.maps;
     const muralsArray = this.state.muralsArray;
 
     let bounds = new google.maps.LatLngBounds();
@@ -61,14 +60,15 @@ class App extends Component {
     this.setState({
       bounds,
       mapIsLoaded: true,
+      visibleMurals: this.state.muralsArray,
     })
   }
 
-  onMarkerClick(image) {
-    console.log(this, image);
+  onMarkerClick(muralData) {
+    console.log(this, muralData.latitude, muralData.longitude);
     this.setState({
       modalIsOpen: true,
-      image,
+      image: muralData.image,
     });
   }
 
@@ -80,8 +80,19 @@ class App extends Component {
     )
   }
 
-  onDragEnd() {
-    console.log(this);
+  onDragEnd(mapProps, map) {
+    const newBounds = map.getBounds();
+
+    const visibleMarkers = this.state.muralsArray.filter(mural => {
+      const { latitude, longitude } = mural.properties;
+      if (newBounds.contains({lat: latitude, lng: longitude})) {
+        return mural;
+      }
+    });
+
+    this.setState({
+      visibleMurals: visibleMarkers,
+    });
   }
 
   render() {
@@ -95,7 +106,7 @@ class App extends Component {
       <div className="mtl-murals">
         <Topbar />
         <div className="wrapper">
-          <div className="map">
+          <div className="map" id="map">
             <MapContainer
               google={this.props.google}
               muralsArray={this.state.muralsArray}
@@ -106,7 +117,7 @@ class App extends Component {
             />
           </div>
           <MuralList
-            muralsArray={this.state.muralsArray}
+            visibleMurals={this.state.visibleMurals}
           />
         </div>
         <div id="modal">

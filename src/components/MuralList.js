@@ -3,13 +3,14 @@ import MuralButton from './MuralButton';
 
 class MuralList extends React.Component {
   render() {
+    console.log(this.props.visibleMurals)
     return (
       <aside className="mural-list__wrapper">
         <div className="mural-list__header">
           Showing X of X murals.
         </div>
         <ul className="mural-list">
-          {this.props.muralsArray.map((mural, index) => {
+          {this.props.visibleMurals.map((mural, index) => {
             return (
               <li key={index}>
                 <MuralButton 
