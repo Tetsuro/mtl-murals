@@ -2,10 +2,6 @@ import React from 'react';
 import MuralButton from './MuralButton';
 
 class MuralList extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
-    console.log('muralList update!')
-  }
-  
   render() {
     return (
       <aside className="mural-list__wrapper">

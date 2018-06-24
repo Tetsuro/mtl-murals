@@ -18,8 +18,12 @@ class App extends Component {
 
     this.state = {
       modalIsOpen: false,
-      muralsArray: []
+      muralsArray: [],
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    
   }
 
   componentDidMount() {
@@ -30,8 +34,36 @@ class App extends Component {
     fetch(muralUrl)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ muralsArray: data.features })
+        this.setState({ 
+          muralsArray: data.features,
+        });
+
+        this.getMapBounds();
       });
+  }
+
+  getMapBounds() {
+    const google = this.props.google; // sets props equal to google
+    const maps = this.props.google.maps; // sets maps to google maps props
+    const muralsArray = this.state.muralsArray;
+
+    let bounds = new google.maps.LatLngBounds();
+
+    muralsArray.map((mural) => {
+      let {
+        latitude,
+        longitude,
+      } = mural.properties;
+
+      bounds.extend({
+        lat: latitude,
+        lng: longitude,
+      });
+    });
+
+    this.setState({
+      bounds,
+    })
   }
 
   onMarkerClick(image) {
@@ -51,10 +83,6 @@ class App extends Component {
     )
   }
 
-  foo(arg) {
-    console.log(this, arg);
-  }
-
   render() {
     const modal = this.state.modalIsOpen ? (
       <Modal>
@@ -71,6 +99,7 @@ class App extends Component {
               google={this.props.google}
               muralsArray={this.state.muralsArray}
               onMarkerClick={this.onMarkerClick}
+              bounds={this.state.bounds}
             />
           </div>
           <MuralList

@@ -11,48 +11,18 @@ export default class MapContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.muralsArray !== null) {
-      return;
-    }
-
-    console.log('map updating');
-
-    this.setState({
-      muralsArray: this.props.muralsArray,
-    });
-
-    this.loadMaps();
-  }
-
-  loadMaps() {
-    if (!this.state.muralsArray) {
-      return;
-    }
-
-    const google = this.props.google; // sets props equal to google
-    const maps = this.props.google.maps; // sets maps to google maps props
-    const muralsArray = this.state.muralsArray;
-    
-    let bounds = new google.maps.LatLngBounds();
-
-    muralsArray.map((mural) => {
-      let {
-        latitude,
-        longitude,
-      } = mural.properties;
-      bounds.extend({
-        lat: latitude,
-        lng: longitude,
-      });
-    });
-
-    this.setState({
-      bounds,
-    });
+    // if (prevState.muralsArray !== null) {
+    //   return;
+    // }
+    // console.log('map updating');
+    // this.setState({
+    //   muralsArray: this.props.muralsArray,
+    // });
+    // this.loadMaps();
   }
 
   render() {
-    if(!this.state.muralsArray) {
+    if(!this.props.muralsArray) {
       return (
         <div>Loading...</div>
       )
@@ -61,11 +31,10 @@ export default class MapContainer extends Component {
         <div>
           <Map 
             google={this.props.google}
-            bounds={this.state.bounds}
-            muralsArray={this.props.muralsArray}
+            bounds={this.props.bounds}
           >
             {
-              this.state.muralsArray.map((mural)=> {
+              this.props.muralsArray.map((mural)=> {
                 return (
                   <Marker
                     key = {mural.properties.id}
