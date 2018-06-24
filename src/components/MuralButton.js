@@ -16,9 +16,10 @@ class MuralButton extends React.Component {
       backgroundImage: `url(${image})`,
     };
 
-      
     return (
-      <button className="mural-button">
+      <button 
+        className="mural-button"
+      >
         <span 
           className="mural-button__thumbnail" 
           style={muralThumbnailStyle}
@@ -30,7 +31,6 @@ class MuralButton extends React.Component {
       </button>
     );
   }
-
 }
 
 export default MuralButton;

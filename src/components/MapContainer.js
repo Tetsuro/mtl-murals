@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Map, Marker} from 'google-maps-react';
-import Modal from './Modal';
 
 export default class MapContainer extends Component {
   constructor() {
@@ -8,7 +7,6 @@ export default class MapContainer extends Component {
     this.state = {
       bounds: null,
       muralsArray: null,
-      modalIsOpen: false,
     }
   }
 
@@ -17,9 +15,12 @@ export default class MapContainer extends Component {
       return;
     }
 
+    console.log('map updating');
+
     this.setState({
       muralsArray: this.props.muralsArray,
     });
+
     this.loadMaps();
   }
 
@@ -49,35 +50,13 @@ export default class MapContainer extends Component {
       bounds,
     });
   }
-  
-  onMarkerClick(image) {
-    console.log(image);
-    this.setState({
-      modalIsOpen: true,
-      image,
-    });
-  }
 
-  onModalClose() {
-    this.setState(
-      {
-        modalIsOpen: false,
-      }
-    )
-  }
-  
   render() {
     if(!this.state.muralsArray) {
       return (
         <div>Loading...</div>
       )
     } else {
-      const modal = this.state.modalIsOpen ? ( 
-        <Modal>
-          <button onClick={this.onModalClose.bind(this)}>Close</button>
-          <img src={this.state.image} />
-        </Modal>) : null;
-
       return (
         <div>
           <Map 
@@ -97,16 +76,14 @@ export default class MapContainer extends Component {
                         lng: mural.properties.longitude,
                       }
                     }
-                    onClick={this.onMarkerClick.bind(this, mural.properties.image)}
+                    onClick={() => {this.props.onMarkerClick(mural.properties.image)}}
                   />
                 )
               })
             }
           </Map>
-          { modal }
         </div>
       );
     }
-
   }
 }
