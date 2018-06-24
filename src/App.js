@@ -15,6 +15,7 @@ class App extends Component {
     this.fetchMutalData = this.fetchMutalData.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
 
     this.state = {
       modalIsOpen: false,
@@ -22,9 +23,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    
-  }
 
   componentDidMount() {
     this.fetchMutalData();
@@ -42,8 +40,8 @@ class App extends Component {
   }
 
   getMapBounds() {
-    const google = this.props.google; // sets props equal to google
-    const maps = this.props.google.maps; // sets maps to google maps props
+    const google = this.props.google;
+    this.maps = this.props.google.maps;
     const muralsArray = this.state.muralsArray;
 
     let bounds = new google.maps.LatLngBounds();
@@ -82,6 +80,10 @@ class App extends Component {
     )
   }
 
+  onDragEnd() {
+    console.log(this);
+  }
+
   render() {
     const modal = this.state.modalIsOpen ? (
       <Modal>
@@ -100,6 +102,7 @@ class App extends Component {
               onMarkerClick={this.onMarkerClick}
               bounds={this.state.bounds}
               mapIsLoaded={this.state.mapIsLoaded}
+              onDragEnd={this.onDragEnd}
             />
           </div>
           <MuralList

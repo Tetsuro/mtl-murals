@@ -21,6 +21,7 @@ export default class MapContainer extends Component {
           <Map 
             google={this.props.google}
             bounds={this.props.bounds}
+            onDragend={this.props.onDragEnd}
           >
             {
               this.props.muralsArray.map((mural)=> {
