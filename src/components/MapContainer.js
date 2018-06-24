@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Map, Marker} from 'google-maps-react';
 
 export default class MapContainer extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.mapIsLoaded) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   render() {
     if(!this.props.muralsArray) {
       return (
@@ -22,7 +30,7 @@ export default class MapContainer extends Component {
                     title = {mural.properties.artiste}
                     position={
                       { 
-                        lat: mural.properties.latitude, 
+                        lat: mural.properties.latitude,
                         lng: mural.properties.longitude,
                       }
                     }

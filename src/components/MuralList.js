@@ -10,7 +10,7 @@ class MuralList extends React.Component {
         </div>
         <ul className="mural-list">
           {this.props.muralsArray.map((mural, index) => {
-            return (            
+            return (
               <li key={index}>
                 <MuralButton 
                   muralData={mural}

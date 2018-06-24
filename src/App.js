@@ -62,6 +62,7 @@ class App extends Component {
 
     this.setState({
       bounds,
+      mapIsLoaded: true,
     })
   }
 
@@ -74,7 +75,6 @@ class App extends Component {
   }
 
   onModalClose() {
-    console.log('on modal close!')
     this.setState(
       {
         modalIsOpen: false,
@@ -99,6 +99,7 @@ class App extends Component {
               muralsArray={this.state.muralsArray}
               onMarkerClick={this.onMarkerClick}
               bounds={this.state.bounds}
+              mapIsLoaded={this.state.mapIsLoaded}
             />
           </div>
           <MuralList
