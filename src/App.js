@@ -15,7 +15,7 @@ class App extends Component {
     this.fetchMutalData = this.fetchMutalData.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
-    this.onDragEnd = this.onDragEnd.bind(this);
+    this.updateVisible = this.updateVisible.bind(this);
 
     this.state = {
       modalIsOpen: false,
@@ -42,7 +42,6 @@ class App extends Component {
   getMapBounds() {
     const google = this.props.google;
     const muralsArray = this.state.muralsArray;
-
     let bounds = new google.maps.LatLngBounds();
 
     muralsArray.map((mural) => {
@@ -71,7 +70,7 @@ class App extends Component {
       image: muralData.image,
     });
   }
-
+  
   onModalClose() {
     this.setState(
       {
@@ -80,7 +79,7 @@ class App extends Component {
     )
   }
 
-  onDragEnd(mapProps, map) {
+  updateVisible(mapProps, map) {
     const newBounds = map.getBounds();
 
     const visibleMarkers = this.state.muralsArray.filter(mural => {
@@ -114,10 +113,13 @@ class App extends Component {
               bounds={this.state.bounds}
               mapIsLoaded={this.state.mapIsLoaded}
               onDragEnd={this.onDragEnd}
+              onClick={this.onClick}
+              updateVisible={this.updateVisible}
             />
           </div>
           <MuralList
             visibleMurals={this.state.visibleMurals}
+            numberOfMurals={this.state.muralsArray.length}
           />
         </div>
         <div id="modal">
