@@ -2,25 +2,6 @@ import React, { Component } from 'react';
 import { Map, Marker} from 'google-maps-react';
 
 export default class MapContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      bounds: null,
-      muralsArray: null,
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevState.muralsArray !== null) {
-    //   return;
-    // }
-    // console.log('map updating');
-    // this.setState({
-    //   muralsArray: this.props.muralsArray,
-    // });
-    // this.loadMaps();
-  }
-
   render() {
     if(!this.props.muralsArray) {
       return (
