@@ -132,3 +132,8 @@ body {
 .modal__image {
   max-width: calc(100vw - 40px);
   max-height: calc(100vh - 40px); }
+
+.modal__button {
+  position: absolute;
+  top: 20px;
+  right: 20px; }

@@ -17,3 +17,9 @@ $modal-spacing: 20px;
   max-width: calc(100vw - #{$modal-spacing * 2});
   max-height: calc(100vh - #{$modal-spacing * 2});
 }
+
+.modal__button {
+  position: absolute;
+  top: $modal-spacing;
+  right: $modal-spacing;
+}

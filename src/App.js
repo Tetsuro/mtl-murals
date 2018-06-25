@@ -26,6 +26,13 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchMutalData();
+    document.addEventListener('keydown', this.keyDown.bind(this));
+  }
+
+  keyDown(evt) {
+    if (evt.keyCode == 27 && this.state.modalIsOpen) {
+      this.onModalClose();
+    }
   }
 
   onMarkerClick(muralData) {
@@ -95,7 +102,7 @@ class App extends Component {
   render() {
     const modal = this.state.modalIsOpen ? (
       <Modal>
-        <button onClick={this.onModalClose}>Close</button>
+        <button className="modal__button" onClick={this.onModalClose}>Close</button>
         <img className="modal__image" src={this.state.image} />
       </Modal>) : null;
 
