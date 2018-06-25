@@ -1,10 +1,10 @@
 import './App.css';
 import React, { Component } from 'react';
+import { GoogleApiWrapper } from 'google-maps-react';
 import Topbar from './components/Topbar';
 import MapContainer from './components/MapContainer';
 import MuralList from './components/MuralList';
 import Modal from './components/Modal';
-import { GoogleApiWrapper } from 'google-maps-react';
 
 const muralUrl = 'http://donnees.ville.montreal.qc.ca/dataset/53d2e586-6e7f-4eae-89a1-2cfa7fc29fa0/resource/d325352b-1c06-4c3a-bf5e-1e4c98e0636b/download/murales.json';
 const googleMapsApiKey = 'AIzaSyD-TATyCOANU-cDVmSUFfawsD-ykZyQcO0';
@@ -21,31 +21,34 @@ class App extends Component {
       modalIsOpen: false,
       muralsArray: [],
       visibleMurals: [],
-    }
+    };
   }
 
   componentDidMount() {
     this.fetchMutalData();
   }
 
-  fetchMutalData() {
-    fetch(muralUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ 
-          muralsArray: data.features,
-        });
-        this.getMapBounds();
-      });
+  onMarkerClick(muralData) {
+    console.log(this, muralData.latitude, muralData.longitude);
+    this.setState({
+      modalIsOpen: true,
+      image: muralData.image,
+    });
+  }
+
+  onModalClose() {
+    this.setState({
+      modalIsOpen: false,
+    });
   }
 
   getMapBounds() {
     const google = this.props.google;
     const muralsArray = this.state.muralsArray;
-    let bounds = new google.maps.LatLngBounds();
+    const bounds = new google.maps.LatLngBounds();
 
     muralsArray.map((mural) => {
-      let {
+      const {
         latitude,
         longitude,
       } = mural.properties;
@@ -60,23 +63,18 @@ class App extends Component {
       bounds,
       mapIsLoaded: true,
       visibleMurals: this.state.muralsArray,
-    })
-  }
-
-  onMarkerClick(muralData) {
-    console.log(this, muralData.latitude, muralData.longitude);
-    this.setState({
-      modalIsOpen: true,
-      image: muralData.image,
     });
   }
-  
-  onModalClose() {
-    this.setState(
-      {
-        modalIsOpen: false,
-      }
-    )
+
+  fetchMutalData() {
+    fetch(muralUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ 
+          muralsArray: data.features,
+        });
+        this.getMapBounds();
+      });
   }
 
   updateVisible(mapProps, map) {
