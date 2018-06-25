@@ -98,7 +98,7 @@ class App extends Component {
     const modal = this.state.modalIsOpen ? (
       <Modal>
         <button onClick={this.onModalClose}>Close</button>
-        <img src={this.state.image} />
+        <img className="modal__image" src={this.state.image} />
       </Modal>) : null;
 
     return (
@@ -112,8 +112,6 @@ class App extends Component {
               onMarkerClick={this.onMarkerClick}
               bounds={this.state.bounds}
               mapIsLoaded={this.state.mapIsLoaded}
-              onDragEnd={this.onDragEnd}
-              onClick={this.onClick}
               updateVisible={this.updateVisible}
             />
           </div>

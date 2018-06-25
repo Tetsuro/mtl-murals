@@ -1,3 +1,5 @@
+$modal-spacing: 20px;
+
 .modal {
   position: fixed;
   width: 100vw;
@@ -5,4 +7,13 @@
   background-color: rgba(0, 0, 0, 0.7);
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__image {
+  max-width: calc(100vw - #{$modal-spacing * 2});
+  max-height: calc(100vh - #{$modal-spacing * 2});
 }

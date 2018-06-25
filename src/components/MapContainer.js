@@ -21,8 +21,7 @@ export default class MapContainer extends Component {
           <Map 
             google={this.props.google}
             bounds={this.props.bounds}
-            onDragend={this.props.updateVisible}
-            onZoom_changed={this.props.updateVisible}
+            onBounds_changed={this.props.updateVisible}
           >
             {
               this.props.muralsArray.map((mural)=> {
