@@ -123,6 +123,7 @@ class App extends Component {
           <MuralList
             visibleMurals={this.state.visibleMurals}
             numberOfMurals={this.state.muralsArray.length}
+            onButtonClick={this.onMarkerClick}
           />
         </div>
         <div id="modal">

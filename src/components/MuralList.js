@@ -2,6 +2,8 @@ import React from 'react';
 import MuralButton from './MuralButton';
 
 class MuralList extends React.Component {
+
+
   render() {
     return (
       <aside className="mural-list__wrapper">
@@ -12,8 +14,9 @@ class MuralList extends React.Component {
           {this.props.visibleMurals.map((mural, index) => {
             return (
               <li key={index}>
-                <MuralButton 
+                <MuralButton
                   muralData={mural}
+                  onButtonClick={this.props.onButtonClick}
                 />
               </li>
             )

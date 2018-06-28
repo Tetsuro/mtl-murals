@@ -1,15 +1,15 @@
 import React from 'react';
 
 class MuralButton extends React.Component {
+
+  onClicked() {
+    console.log('hi!');
+  }
+
   render() {
     let { 
       adresse: address, 
-      annee: year, 
-      artiste: artist,
       image,
-      latitude,
-      longitude,
-      id,
     } = this.props.muralData.properties;
 
     let muralThumbnailStyle = {
@@ -17,8 +17,9 @@ class MuralButton extends React.Component {
     };
 
     return (
-      <button 
+      <button
         className="mural-button"
+        onClick={() => { this.props.onButtonClick(this.props.muralData.properties)}}
       >
         <span 
           className="mural-button__thumbnail" 
