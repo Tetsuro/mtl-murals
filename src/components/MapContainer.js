@@ -10,6 +10,14 @@ export default class MapContainer extends Component {
     }
   }
 
+  onMouseOver(props, marker, e) {
+    marker.setAnimation(this.google.maps.Animation.BOUNCE);
+  }
+
+  onMouseOut(props, marker, e) {
+    marker.setAnimation(null);
+  }
+
   render() {
     if(!this.props.muralsArray) {
       return (
@@ -36,6 +44,8 @@ export default class MapContainer extends Component {
                       }
                     }
                     onClick={() => {this.props.onMarkerClick(mural.properties)}}
+                    onMouseover={this.onMouseOver}
+                    onMouseout={this.onMouseOut}
                   />
                 )
               })
