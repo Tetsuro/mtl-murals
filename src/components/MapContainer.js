@@ -5,6 +5,8 @@ export default class MapContainer extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.mapIsLoaded) {
       return false;
+    } else {
+      return true;
     }
   }
 
