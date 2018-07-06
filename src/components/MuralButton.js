@@ -1,37 +1,30 @@
 import React from 'react';
 
-class MuralButton extends React.Component {
+const MuralButton = (props) => {
+  const {
+    adresse: address,
+    image,
+  } = props.muralData.properties;
 
-  onClicked() {
-    console.log('hi!');
-  }
+  const muralThumbnailStyle = {
+    backgroundImage: `url(${image})`,
+  };
 
-  render() {
-    let { 
-      adresse: address, 
-      image,
-    } = this.props.muralData.properties;
-
-    let muralThumbnailStyle = {
-      backgroundImage: `url(${image})`,
-    };
-
-    return (
-      <button
-        className="mural-button"
-        onClick={() => { this.props.onButtonClick(this.props.muralData.properties)}}
-      >
-        <span 
-          className="mural-button__thumbnail" 
-          style={muralThumbnailStyle}
-        >
-        </span> 
-        <span className="mural-button__info">
-          {address}
-        </span>      
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      type="button"
+      className="mural-button"
+      onClick={() => { props.onButtonClick(props.muralData.properties); }}
+    >
+      <span
+        className="mural-button__thumbnail"
+        style={muralThumbnailStyle}
+      />
+      <span className="mural-button__info">
+        {address}
+      </span>
+    </button>
+  );
+};
 
 export default MuralButton;
