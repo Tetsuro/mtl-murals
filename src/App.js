@@ -29,14 +29,7 @@ class App extends Component {
     document.addEventListener('keydown', this.keyDown.bind(this));
   }
 
-  keyDown(evt) {
-    if (evt.keyCode == 27 && this.state.modalIsOpen) {
-      this.onModalClose();
-    }
-  }
-
   onMarkerClick(muralData) {
-    console.log(this, muralData.latitude, muralData.longitude);
     this.setState({
       modalIsOpen: true,
       image: muralData.image,
@@ -50,8 +43,8 @@ class App extends Component {
   }
 
   getMapBounds() {
-    const google = this.props.google;
-    const muralsArray = this.state.muralsArray;
+    const { google } = this.props;
+    const { muralsArray } = this.state;
     const bounds = new google.maps.LatLngBounds();
 
     muralsArray.map((mural) => {
@@ -64,20 +57,30 @@ class App extends Component {
         lat: latitude,
         lng: longitude,
       });
+
+      return null;
     });
 
     this.setState({
       bounds,
       mapIsLoaded: true,
-      visibleMurals: this.state.muralsArray,
+      visibleMurals: muralsArray,
     });
+  }
+
+  keyDown(evt) {
+    const { modalIsOpen } = this.state;
+
+    if (evt.keyCode === 27 && modalIsOpen) {
+      this.onModalClose();
+    }
   }
 
   fetchMutalData() {
     fetch(muralUrl)
-      .then((response) => response.json())
+      .then(response => response.json())
       .then((data) => {
-        this.setState({ 
+        this.setState({
           muralsArray: data.features,
         });
         this.getMapBounds();
@@ -86,12 +89,14 @@ class App extends Component {
 
   updateVisible(mapProps, map) {
     const newBounds = map.getBounds();
+    const { muralsArray } = this.state;
 
-    const visibleMarkers = this.state.muralsArray.filter(mural => {
+    const visibleMarkers = muralsArray.filter((mural) => {
       const { latitude, longitude } = mural.properties;
-      if (newBounds.contains({lat: latitude, lng: longitude})) {
+      if (newBounds.contains({ lat: latitude, lng: longitude })) {
         return mural;
       }
+      return null;
     });
 
     this.setState({
@@ -100,10 +105,23 @@ class App extends Component {
   }
 
   render() {
-    const modal = this.state.modalIsOpen ? (
+    const {
+      modalIsOpen,
+      image,
+      muralsArray,
+      bounds,
+      mapIsLoaded,
+      visibleMurals,
+    } = this.state;
+
+    const { google } = this.props;
+
+    const modal = modalIsOpen ? (
       <Modal>
-        <button className="modal__button" onClick={this.onModalClose}>Close</button>
-        <img className="modal__image" src={this.state.image} />
+        <button type="button" className="modal__button" onClick={this.onModalClose}>
+          Close
+        </button>
+        <img className="modal__image" src={image} alt="" />
       </Modal>) : null;
 
     return (
@@ -112,17 +130,17 @@ class App extends Component {
         <div className="wrapper">
           <div className="map" id="map">
             <MapContainer
-              google={this.props.google}
-              muralsArray={this.state.muralsArray}
+              google={google}
+              muralsArray={muralsArray}
               onMarkerClick={this.onMarkerClick}
-              bounds={this.state.bounds}
-              mapIsLoaded={this.state.mapIsLoaded}
+              bounds={bounds}
+              mapIsLoaded={mapIsLoaded}
               updateVisible={this.updateVisible}
             />
           </div>
           <MuralList
-            visibleMurals={this.state.visibleMurals}
-            numberOfMurals={this.state.muralsArray.length}
+            visibleMurals={visibleMurals}
+            numberOfMurals={muralsArray.length}
             onButtonClick={this.onMarkerClick}
           />
         </div>
