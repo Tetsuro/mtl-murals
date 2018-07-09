@@ -8,7 +8,7 @@ const MuralList = props => (
     </div>
     <ul className="mural-list">
       {props.visibleMurals.map(mural => (
-        <li key={mural.id}>
+        <li key={mural.properties.id}>
           <MuralButton
             muralData={mural}
             onButtonClick={props.onButtonClick}
